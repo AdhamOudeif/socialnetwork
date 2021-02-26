@@ -124,21 +124,11 @@ ob_start();
                     <label>Female</label>
                     <div class="required"></div>
                     <br>
-                    <!--Hometown-->
-                    <label>Hometown</label><br>
-                    <input type="text" name="userhometown" id="userhometown">
-                    <br>
+                    
                     <!--Package Two-->
                     <h2>Additional Information</h2>
                     <hr>
                     <!--Marital Status-->
-                    <input type="radio" name="userstatus" value="S" id="singlestatus">
-                    <label>Single</label>
-                    <input type="radio" name="userstatus" value="E" id="engagedstatus">
-                    <label>Engaged</label>
-                    <input type="radio" name="userstatus" value="M" id="marriedstatus">
-                    <label>Married</label>
-                    <br><br>
                     <!--About Me-->
                     <label>About Me</label><br>
                     <textarea rows="12" name="userabout" id="userabout"></textarea>
@@ -185,14 +175,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // A form is posted
         $useremail = $_POST['useremail'];
         $userbirthdate = $_POST['selectyear'] . '-' . $_POST['selectmonth'] . '-' . $_POST['selectday'];
         $usergender = $_POST['usergender'];
-        $userhometown = $_POST['userhometown'];
         $userabout = $_POST['userabout'];
-        if (isset($_POST['userstatus'])){
-            $userstatus = $_POST['userstatus'];
-        }
-        else{
-            $userstatus = NULL;
-        }
+        // if (isset($_POST['userstatus'])){
+        //     $userstatus = $_POST['userstatus'];
+        // }
+        // else{
+        //     $userstatus = NULL;
+        // }
         // Check for Some Unique Constraints
         $query = mysqli_query($conn, "SELECT user_nickname, user_email FROM users WHERE user_nickname = '$usernickname' OR user_email = '$useremail'");
         if(mysqli_num_rows($query) > 0){
@@ -209,8 +198,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // A form is posted
             }
         }
         // Insert Data
-        $sql = "INSERT INTO users(user_firstname, user_lastname, user_nickname, user_password, user_email, user_gender, user_birthdate, user_status, user_about, user_hometown)
-                VALUES ('$userfirstname', '$userlastname', '$usernickname', '$userpassword', '$useremail', '$usergender', '$userbirthdate', '$userstatus', '$userabout', '$userhometown')";
+        $sql = "INSERT INTO users(user_firstname, user_lastname, user_nickname, user_password, user_email, user_gender, user_birthdate, user_about)
+                VALUES ('$userfirstname', '$userlastname', '$usernickname', '$userpassword', '$useremail', '$usergender', '$userbirthdate', '$userabout')";
         $query = mysqli_query($conn, $sql);
         if($query){
             $query = mysqli_query($conn, "SELECT user_id FROM users WHERE user_email = '$useremail'");

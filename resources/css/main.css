@@ -52,7 +52,7 @@ span {
 /*============== NAVBAR SETTINGS ============*/
 
 .usernav {
-    background-color: #4267b2;
+    background-color:green;
     overflow: auto;
 }
 
@@ -82,7 +82,7 @@ span {
 .usernav .globalsearch {
     margin: 0;
     width: 60%;
-    background-color: #4267b2;
+    background-color:rgb(5, 103, 5);
 }
 
 .usernav .globalsearch input[type=text] {
