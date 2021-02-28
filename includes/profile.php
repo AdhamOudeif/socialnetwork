@@ -20,22 +20,22 @@ else if($row['user_gender'] == "F")
     echo 'Female';
 echo '<br>';
 // Status
-if(!empty($row['user_status'])){
-    if($row['user_status'] == "S")
-        echo 'Single';
-    else if($row['user_status'] == "E")
-        echo 'Engaged';
-    else if($row['user_status'] == "M")
-        echo 'Married';
-    echo '<br>';
-}
+// if(!empty($row['user_status'])){
+//     if($row['user_status'] == "S")
+//         echo 'Single';
+//     else if($row['user_status'] == "E")
+//         echo 'Engaged';
+//     else if($row['user_status'] == "M")
+//         echo 'Married';
+//     echo '<br>';
+// }
 // Birthdate
 echo $row['user_birthdate'];
 // Additional Information
-if(!empty($row['user_hometown'])){
-    echo '<br>';
-    echo $row['user_hometown'];
-}
+// if(!empty($row['user_hometown'])){
+//     echo '<br>';
+//     echo $row['user_hometown'];
+// }
 if(!empty($row['user_about'])){
     echo '<br>';
     echo $row['user_about'];
@@ -63,22 +63,22 @@ if($flag == 1){
 echo '<center>'; 
 echo'</div>';
 
-$query4 = mysqli_query($conn, "SELECT * FROM user_phone WHERE user_id = {$row['user_id']}");
-if(!$query4){
-    echo mysqli_error($conn);
-}
-if(mysqli_num_rows($query4) > 0){
-    echo '<br>';
-    echo '<div class="profile">';
-    echo '<center class="changeprofile">'; 
-    echo 'Phones:';
-    echo '<br>';
-    while($row4 = mysqli_fetch_assoc($query4)){
-        echo $row4['user_phone'];
-        echo '<br>';
-    }
-    echo '</center>';
-    echo '</div>';
-}
+// $query4 = mysqli_query($conn, "SELECT * FROM user_phone WHERE user_id = {$row['user_id']}");
+// if(!$query4){
+//     echo mysqli_error($conn);
+// }
+// if(mysqli_num_rows($query4) > 0){
+//     echo '<br>';
+//     echo '<div class="profile">';
+//     echo '<center class="changeprofile">'; 
+//     echo 'Phones:';
+//     echo '<br>';
+//     while($row4 = mysqli_fetch_assoc($query4)){
+//         echo $row4['user_phone'];
+//         echo '<br>';
+//     }
+//     echo '</center>';
+//     echo '</div>';
+// }
 
 ?>
