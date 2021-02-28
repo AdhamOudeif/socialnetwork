@@ -1,4 +1,4 @@
-DROP DATABASE socialnetwork;
+ DROP DATABASE socialnetwork;
 CREATE DATABASE socialnetwork;
 
 CREATE TABLE users (
@@ -9,10 +9,8 @@ user_nickname       VARCHAR(20),
 user_password       VARCHAR(255) NOT NULL,
 user_email          VARCHAR(255) NOT NULL,
 user_gender         CHAR(1) NOT NULL,
-user_birthdate      DATE NOT NULL,    
-user_status         CHAR(1),
-user_about          TEXT,
-user_hometown       VARCHAR(255),
+user_birthdate      DATE NOT NULL,
+user_about          TEXT,    
 PRIMARY KEY (user_id)
 );
 
@@ -27,15 +25,29 @@ FOREIGN KEY (user2_id) REFERENCES users(user_id)
 CREATE TABLE posts (
 post_id             INT NOT NULL AUTO_INCREMENT,
 post_caption        TEXT NOT NULL,
+post_topic            TEXT NOT NULL,
 post_time           TIMESTAMP NOT NULL, 
-post_public         CHAR(1) NOT NULL,
+post_photo             TEXT,
 post_by             INT NOT NULL,
+post_likes            INT NOT NULL,
+post_reposts        INT NOT NULL,
+post_public         CHAR(1) NOT NULL,
 PRIMARY KEY (post_id),
-FOREIGN KEY (post_by) REFERENCES users(user_id)
+FOREIGN KEY (post_by) REFERENCES users(user_id), 
 );
 
-CREATE TABLE user_phone (
-user_id         INT,
-user_phone      INT,
+CREATE TABLE likes (
+user_id         INT NOT NULL,
+post_id         INT NOT NULL,
+
+FOREIGN KEY (post_id) REFERENCES posts(post_id),
+FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE reposts(
+user_id         INT NOT NULL,
+post_id         INT NOT NULL,
+
+FOREIGN KEY (post_id) REFERENCES posts(post_id),
 FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
