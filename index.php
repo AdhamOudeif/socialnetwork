@@ -146,7 +146,7 @@ ob_start();
 $conn = connect();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') { // A form is posted
     if (isset($_POST['login'])) { // Login process
-        $useremail = $_POST['useremail'];
+        $useremail = strtolower($_POST['useremail']);
         $userpass = md5($_POST['userpass']);
         $query = mysqli_query($conn, "SELECT * FROM users WHERE user_email = '$useremail' AND user_password = '$userpass'");
         if($query){
@@ -172,7 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // A form is posted
         $userlastname = $_POST['userlastname'];
         $usernickname = $_POST['usernickname'];
         $userpassword = md5($_POST['userpass']);
-        $useremail = $_POST['useremail'];
+        $useremail = strtolower($_POST['useremail']);
         $userbirthdate = $_POST['selectyear'] . '-' . $_POST['selectmonth'] . '-' . $_POST['selectday'];
         $usergender = $_POST['usergender'];
         $userabout = $_POST['userabout'];
