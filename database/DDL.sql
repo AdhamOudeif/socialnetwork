@@ -1,4 +1,4 @@
- DROP DATABASE socialnetwork;
+DROP DATABASE socialnetwork;
 CREATE DATABASE socialnetwork;
 
 CREATE TABLE users (
@@ -50,4 +50,4 @@ post_id         INT NOT NULL,
 
 FOREIGN KEY (post_id) REFERENCES posts(post_id),
 FOREIGN KEY (user_id) REFERENCES users(user_id)
-);
+); 
