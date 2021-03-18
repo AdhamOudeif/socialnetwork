@@ -16,6 +16,8 @@ include 'profile_picture.php';
 echo '<a class="profilelink" href="profile.php?id=' . $row['user_id'] .'">' . $row['user_firstname'] . ' ' . $row['user_lastname'] . '<a>';
 echo'</div>';
 echo '<br>';
+echo '<b class="topic">' . $row['post_topic'] . '</b>'; 
+echo '<br><br>';
 echo '<p class="caption">' . $row['post_caption'] . '</p>';
 echo '<center>'; 
 $target = glob("data/images/posts/" . $row['post_id'] . ".*");

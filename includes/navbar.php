@@ -13,7 +13,7 @@
             <select name="location">
                 <option value="emails">Emails</option>
                 <option value="names">Names</option>
-                <option value="hometowns">Hometowns</option>
+                <option value="topics">Topics</option>
                 <option value="posts">Posts</option>
             </select><input type="text" placeholder="Search" name="query" id="query"><input type="submit" value="Search" id="querybutton">
         </form>

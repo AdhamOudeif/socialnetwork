@@ -44,7 +44,7 @@ $conn = connect();
                 $sql6 = "DELETE FROM friendship
                         WHERE friendship.user1_id = {$_GET['id']} AND friendship.user2_id = {$_SESSION['user_id']}";
                 $query6 = mysqli_query($conn, $sql6);
-                if($query){
+                if($query6){
                     echo '<div class="userquery">';
                     echo 'You have Ignored ' . $_GET['name'];
                     echo '<br><br>';

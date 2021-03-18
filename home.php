@@ -32,6 +32,8 @@ $conn = connect();
                 <input type="checkbox" id="public" name="public">
                 <label for="public">Public</label>
                 </span>
+                Topic <span class="required" style="display:none;"> *You can't Leave the Topic Empty.</span><br>
+                <textarea rows="1" name="topic"></textarea>
                 Caption <span class="required" style="display:none;"> *You can't Leave the Caption Empty.</span><br>
                 <textarea rows="6" name="caption"></textarea>
                 <center><img src="" id="preview" style="max-width:580px; display:none;"></center>
@@ -50,14 +52,14 @@ $conn = connect();
         <h1>News Feed</h1>
         <?php 
         // Public Posts Union Friends' Private Posts
-        $sql = "SELECT posts.post_caption, posts.post_time, posts.post_public, users.user_firstname,
+        $sql = "SELECT posts.post_caption, posts.post_topic, posts.post_time, posts.post_public, users.user_firstname,
                         users.user_lastname, users.user_id, users.user_gender, posts.post_id
                 FROM posts
                 JOIN users
                 ON posts.post_by = users.user_id
                 WHERE posts.post_public = 'Y' OR users.user_id = {$_SESSION['user_id']}
                 UNION
-                SELECT posts.post_caption, posts.post_time, posts.post_public, users.user_firstname,
+                SELECT posts.post_caption, posts.post_time, posts.post_topic, posts.post_public, users.user_firstname,
                         users.user_lastname, users.user_id, users.user_gender, posts.post_id
                 FROM posts
                 JOIN users
@@ -132,6 +134,7 @@ $conn = connect();
 if($_SERVER['REQUEST_METHOD'] == 'POST') { // Form is Posted
     // Assign Variables
     $caption = $_POST['caption'];
+    $topic = $_POST['topic'];
     if(isset($_POST['public'])) {
         $public = "Y";
     } else {
@@ -139,8 +142,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') { // Form is Posted
     }
     $poster = $_SESSION['user_id'];
     // Apply Insertion Query
-    $sql = "INSERT INTO posts (post_caption, post_public, post_time, post_by)
-            VALUES ('$caption', '$public', NOW(), $poster)";
+    $sql = "INSERT INTO posts (post_caption, post_topic, post_public, post_time, post_by)
+            VALUES ('$caption','$topic', '$public', NOW(), $poster)";
     $query = mysqli_query($conn, $sql);
     // Action on Successful Query
     if($query){
