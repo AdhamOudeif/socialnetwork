@@ -66,7 +66,7 @@ if(isset($_GET['id']) && $_GET['id'] != $_SESSION['user_id']) {
         <?php
         $postsql;
         if($flag == 0) { // Your Own Profile       
-            $postsql = "SELECT posts.post_caption, posts.post_time, users.user_firstname, users.user_lastname,
+            $postsql = "SELECT posts.post_caption, posts.post_topic, posts.post_time, users.user_firstname, users.user_lastname,
                                 posts.post_public, users.user_id, users.user_gender, users.user_nickname,
                                 users.user_birthdate, users.user_about, 
                                 posts.post_id
