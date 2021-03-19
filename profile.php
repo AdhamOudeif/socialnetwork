@@ -100,7 +100,7 @@ if(isset($_GET['id']) && $_GET['id'] != $_SESSION['user_id']) {
             mysqli_data_seek($profilequery,0);
             if(isset($row['friendship_status'])){ // Either a friend or requested as a friend
                 if($row['friendship_status'] == 1){ // Friend
-                    $postsql = "SELECT posts.post_caption, posts.post_time, users.user_firstname, users.user_lastname,
+                    $postsql = "SELECT posts.post_caption, posts.post_topic, posts.post_time, users.user_firstname, users.user_lastname,
                                         posts.post_public, users.user_id, users.user_gender, users.user_nickname,
                                         users.user_birthdate, users.user_about, 
                                         posts.post_id
@@ -111,25 +111,25 @@ if(isset($_GET['id']) && $_GET['id'] != $_SESSION['user_id']) {
                                 ORDER BY posts.post_time DESC";
                 }
                 else if($row['friendship_status'] == 0){ // Requested as a Friend
-                    $postsql = "SELECT posts.post_caption, posts.post_time, users.user_firstname, users.user_lastname,
+                    $postsql = "SELECT posts.post_caption, posts.post_topic, posts.post_time, users.user_firstname, users.user_lastname,
                                         posts.post_public, users.user_id, users.user_gender, users.user_nickname,
                                         users.user_birthdate, users.user_about, 
                                         posts.post_id
                                 FROM posts
                                 JOIN users
                                 ON users.user_id = posts.post_by
-                                WHERE posts.post_by = $current_id AND posts.post_public = 'Y'
+                                WHERE posts.post_by = $current_id AND posts.post_public = 'N'
                                 ORDER BY posts.post_time DESC";
                 }
             } else { // Not a friend
-                $postsql = "SELECT posts.post_caption, posts.post_time, users.user_firstname, users.user_lastname,
+                $postsql = "SELECT posts.post_caption, posts.post_topic, posts.post_time, users.user_firstname, users.user_lastname,
                                     posts.post_public, users.user_id, users.user_gender, users.user_nickname,
                                     users.user_birthdate, users.user_about, 
                                     posts.post_id
                             FROM posts
                             JOIN users
                             ON users.user_id = posts.post_by
-                            WHERE posts.post_by = $current_id AND posts.post_public = 'Y'
+                            WHERE posts.post_by = $current_id AND posts.post_public = 'N'
                             ORDER BY posts.post_time DESC";
             }
         }

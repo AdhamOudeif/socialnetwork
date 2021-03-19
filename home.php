@@ -57,7 +57,7 @@ $conn = connect();
                 FROM posts
                 JOIN users
                 ON posts.post_by = users.user_id
-                WHERE posts.post_public = 'Y' OR users.user_id = {$_SESSION['user_id']}
+                WHERE posts.post_public = 'N' OR users.user_id = {$_SESSION['user_id']}
                 UNION
                 SELECT posts.post_caption, posts.post_time, posts.post_topic, posts.post_public, users.user_firstname,
                         users.user_lastname, users.user_id, users.user_gender, posts.post_id
@@ -74,7 +74,7 @@ $conn = connect();
                     WHERE friendship.user1_id = {$_SESSION['user_id']} AND friendship.friendship_status = 1
                 ) userfriends
                 ON userfriends.user_id = posts.post_by
-                WHERE posts.post_public = 'N'
+                WHERE posts.post_public = 'Y'
                 ORDER BY post_time DESC";
         $query = mysqli_query($conn, $sql);
         if(!$query){
