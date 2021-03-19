@@ -36,8 +36,46 @@ $conn = connect();
                 }
                 include 'includes/userquery.php';
             } else if($location == 'topics') {
-                $sql = "SELECT * FROM posts WHERE posts.post_topic = '$key'";
-                include 'includes/userquery.php';
+                $sql = "SELECT posts.post_caption, posts.post_topic, posts.post_time, posts.post_public, users.user_firstname,
+                users.user_lastname, users.user_id, users.user_gender, posts.post_id
+        FROM posts
+        JOIN users
+        ON posts.post_by = users.user_id
+        WHERE posts.post_topic = '$key'
+        UNION
+        SELECT posts.post_caption, posts.post_topic, posts.post_time, posts.post_public, users.user_firstname,
+                users.user_lastname, users.user_id, users.user_gender, posts.post_id
+        FROM posts
+        JOIN users
+        ON posts.post_by = users.user_id
+        JOIN (
+            SELECT friendship.user1_id AS user_id
+            FROM friendship
+            WHERE friendship.user2_id = {$_SESSION['user_id']} AND friendship.friendship_status = 1
+            UNION
+            SELECT friendship.user2_id AS user_id
+            FROM friendship
+            WHERE friendship.user1_id = {$_SESSION['user_id']} AND friendship.friendship_status = 1
+        ) userfriends
+        ON userfriends.user_id = posts.post_by
+        WHERE posts.post_public = 'N' AND posts.post_caption LIKE '%$key%'
+        ORDER BY post_time DESC";
+$query = mysqli_query($conn, $sql);
+$width = '40px'; // Profile Image Dimensions
+$height = '40px';
+if(!$query){
+    echo mysqli_error($conn);
+}
+if(mysqli_num_rows($query) == 0){
+    echo '<div class="post">';
+    echo 'There is no results given the keyword, try to widen your search query.';
+    echo '</div>';
+    echo '<br>';
+}
+while($row = mysqli_fetch_assoc($query)){
+    include 'includes/post.php';
+    echo '<br>';
+}
             } else if($location == 'posts') {
                 $sql = "SELECT posts.post_caption, posts.post_topic, posts.post_time, posts.post_public, users.user_firstname,
                                 users.user_lastname, users.user_id, users.user_gender, posts.post_id
