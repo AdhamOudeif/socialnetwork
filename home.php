@@ -30,7 +30,7 @@ $conn = connect();
                 <hr>
                 <span style="float:right; color:black">
                 <input type="checkbox" id="public" name="public">
-                <label for="public">Public</label>
+                <label for="public">Private</label>
                 </span>
                 Topic <span class="required" style="display:none;"> *You can't Leave the Topic Empty.</span><br>
                 <textarea rows="1" name="topic"></textarea>

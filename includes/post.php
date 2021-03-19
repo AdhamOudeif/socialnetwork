@@ -1,7 +1,7 @@
 <?php
 
 echo '<div class="post">';
-if($row['post_public'] == 'Y') {
+if($row['post_public'] == 'N') {
     echo '<p class="public">';
     echo 'Public';
 }else {
